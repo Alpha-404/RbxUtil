@@ -8,6 +8,7 @@ function Util.Weld(p1, p2, c0)
   w.Part0 = p1
   w.Part1 = p2
   w.C0 = C0
+  return w
 end
 
 function Util.CreateTween(obj, speed, prop, mod)
