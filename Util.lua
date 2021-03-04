@@ -14,10 +14,13 @@ function Util.CreateTween(obj, speed, prop, mod)
 	game:GetService("TweenService"):Create(obj, TweenInfo.new(speed), {[prop] = mod}):Play()
 end
 
-function Util.Lerp(speed, prop, cf)
-	for i = 0,1 , speed  do
-		prop = prop:lerp(cf,i)
-	end
+function Util.Lerp(speed, obj, cf)
+	spawn(function()
+		for i = 0,1 , speed  do
+			obj.C0 = obj.C0:Lerp(cf, i)
+			game:GetService("RunService).RenderStepped:Wait()
+		end
+	end)
 end
 
 function Util.TypeWrite(object,text)
