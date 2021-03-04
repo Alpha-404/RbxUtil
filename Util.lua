@@ -2,36 +2,36 @@ local Util = {}
 
 --More coming soon
 
-function Util:Weld(p1, p2, c0)
-  local w = Instance.new("Weld", p1)
-  w.Name = "Weld" .. p1.Name
-  w.Part0 = p1
-  w.Part1 = p2
-  w.C0 = C0
-  return w
+function Util.Weld(p1, p2, c0)
+	local w = Instance.new("Weld", p1)
+	w.Name = "Weld" .. p1.Name
+	w.Part0 = p1
+	w.Part1 = p2
+	w.C0 = c0
+	return w
 end
 
-function Util:CreateTween(obj, speed, prop, mod)
+function Util.CreateTween(obj, speed, prop, mod)
 	game:GetService("TweenService"):Create(obj, TweenInfo.new(speed), {[prop] = mod}):Play()
 end
 
-function Util:Lerp(speed, obj, cf)
+function Util.Lerp(speed, obj, cf)
 	spawn(function()
 		for i = 0,1 , speed  do
 			obj.C0 = obj.C0:Lerp(cf, i)
-			game:GetService("RunService).RenderStepped:Wait()
+			game:GetService("RunService").RenderStepped:Wait()
 		end
 	end)
 end
 
-function Util:TypeWrite(object,text)
+function Util.TypeWrite(object,text)
 	for i = 1,#text do
 		object.Text = string.sub(text,1,i)
 		wait(0.05)
 	end
 end
 
-function Util:RandomString()
+function Util.RandomString()
 	local length = math.random(10,20)
 	local array = {}
 	for i = 1, length do
@@ -40,24 +40,24 @@ function Util:RandomString()
 	return table.concat(array)
 end
 
-function Util:r15(plr)
+function Util.r15(plr)
 	if plr.Character:FindFirstChildOfClass('Humanoid').RigType == Enum.HumanoidRigType.R15 then
 		return true
 	end
 end
 
-function Util:r6(plr)
+function Util.r6(plr)
 	if plr.Character:FindFirstChildOfClass('Humanoid').RigType == Enum.HumanoidRigType.R6 then
 		return true
 	end
 end
 
-function Util:findroot(char)
+function Util.findroot(char)
 	local rootPart = char:FindFirstChild('HumanoidRootPart') or char:FindFirstChild('Torso') or char:FindFirstChild('UpperTorso')
 	return rootPart
 end
 
-function Util:IsString(lol)
+function Util.IsString(lol)
 	if tostring(lol) and not tonumber(lol) then
 		return true
 	else
@@ -65,7 +65,7 @@ function Util:IsString(lol)
 	end
 end
 
-function Util:IsNumber(num)
+function Util.IsNumber(num)
 	if tonumber(num) or num == 'inf' then
 		return true
 	else
@@ -73,7 +73,7 @@ function Util:IsNumber(num)
 	end
 end
 
-function Util:Joint(P1,P2, CF)
+function Util.Joint(P1,P2, CF)
 	local AlignP = Instance.new('AlignPosition', P2);
 	AlignP.ApplyAtCenterOfMass = true;
 	AlignP.MaxForce = 67752;
@@ -99,7 +99,7 @@ function Util:Joint(P1,P2, CF)
 	AttB.Name = "Align" .. P1.Name
 end
 
-function Util:findplayer(thing)
+function Util.findplayer(thing)
 	if thing == "me" then
 		return p
 	else
@@ -111,4 +111,4 @@ function Util:findplayer(thing)
 	end
 end
 
-return util
+return Util
