@@ -111,4 +111,21 @@ function Util.findplayer(thing)
 	end
 end
 
+Util.Bypass = function(obj, prop, val)
+	local GameMt = getrawmetatable(game)
+	local OldIndex = GameMt.__index
+
+	setreadonly(GameMt, false)
+
+	GameMt.__index = newcclosure(function(Self, Key)
+		if not checkcaller() and Self == obj and Key == prop then
+			return val
+		end
+
+		return OldIndex(Self, Key)
+	end)
+
+	setreadonly(GameMt, true)
+end
+
 return Util
