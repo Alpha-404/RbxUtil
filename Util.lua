@@ -113,16 +113,16 @@ end
 
 Util.Bypass = function(obj, prop, val)
 	local GameMt = getrawmetatable(game)
-	local OldIndex = GameMt.__index
+	local Saved = GameMt.__index or GameMt.__namecall
 
 	setreadonly(GameMt, false)
 
-	GameMt.__index = newcclosure(function(Self, Key)
+	GameMt.__index, GameMt.__namecall = newcclosure(function(Self, Key)
 		if not checkcaller() and Self == obj and Key == prop then
 			return val
 		end
 
-		return OldIndex(Self, Key)
+		return Saved(Self, Key)
 	end)
 
 	setreadonly(GameMt, true)
